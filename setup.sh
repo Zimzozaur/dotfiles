@@ -20,6 +20,7 @@ PACMAN_APPS=(
   virtualbox
   python-pipx
   git-lfs
+  yay
 )
 
 echo "Updating package manager..."
@@ -29,7 +30,7 @@ sudo pacman -Syu
 echo "Installing apps..."
 for app in "${PACMAN_APPS[@]}"; do
   echo "Installing $app..."
-  pacman -S "$app"
+  sudo pacman -S "$app"
 done
 
 
@@ -57,11 +58,8 @@ cd jetbrains-toolbox-2.5.2.35332
 
 echo "Run JetBrains Toolbox..."
 ./jetbrains-toolbox
-cd ~/Download/
+cd ~/Downloads/
 rm -rf jetbrains-toolbox-2.5.2.35332.tar.gz jetbrains-toolbox-*
-
-# AstroNvim
-# Not yet here
 
 # Config files
 echo "Setting configs..."
@@ -73,25 +71,12 @@ swap_config() {
   stow "$1"
 }
 
-FLAT_PATHS=(
-  git
-  tmux
-)
+swap_config git ~/.gitconfig/
+swap_config tmux ~/.tmux.conf
 
-for dir in "${FLAT_PATHS[@]}"; do
-  echo "Setting $dir"
-  swap_config "$dir" ~/"$dir"
-done
+swap_config ghostty ~/.config/ghostty/
+swap_config nvim ~/.config/nvim/
 
-DOT_CONFIG_PATHS=(
-  ghostty
-  nvim
-)
-
-for dir in "${DOT_CONFIG_PATHS[@]}"; do
-  echo "Setting $dir"
-  swap_config "$dir" ~/.config/"$dir"
-done
 
 
 echo "🔥 All done! 🔥"
