@@ -27,7 +27,7 @@ sudo pacman -Syu
 
 
 echo "Installing apps..."
-for app in "${APP[@]}"; do
+for app in "${PACMAN_APPS[@]}"; do
   echo "Installing $app..."
   pacman -S "$app"
 done
