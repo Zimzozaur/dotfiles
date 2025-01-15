@@ -71,8 +71,8 @@ swap_config_flat() {
   stow "$1"
 }
 
-swap_config git ~/.gitconfig/
-swap_config tmux ~/.tmux.conf
+swap_config_flat git $HOME/.gitconfig/
+swap_config_flat tmux $HOME/.tmux.conf
 
 swap_config_nested() {
   echo "Setting $1"
@@ -80,8 +80,8 @@ swap_config_nested() {
   stow "$1"
 }
 
-swap_config_nested ghostty ~/.config/ghostty/
-swap_config_nested nvim ~/.config/nvim/
+swap_config_nested ghostty $HOME/.config/ghostty/
+swap_config_nested nvim $HOME/.config/nvim/
 
 
 
