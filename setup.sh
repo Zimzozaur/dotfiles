@@ -30,7 +30,7 @@ sudo pacman -Syu
 echo "Installing apps..."
 for app in "${PACMAN_APPS[@]}"; do
   echo "Installing $app..."
-  sudo pacman -S "$app"
+  sudo pacman -S "$app" --noconfirm
 done
 
 
@@ -65,17 +65,23 @@ rm -rf jetbrains-toolbox-2.5.2.35332.tar.gz jetbrains-toolbox-*
 echo "Setting configs..."
 cd ~/dotfiles/
 
-swap_config() {
+swap_config_flat() {
   echo "Setting $1"
-  rm -rf "$2"
+  rm -f "$2"
   stow "$1"
 }
 
 swap_config git ~/.gitconfig/
 swap_config tmux ~/.tmux.conf
 
-swap_config ghostty ~/.config/ghostty/
-swap_config nvim ~/.config/nvim/
+swap_config_nested() {
+  echo "Setting $1"
+  rm -rf "$2"
+  stow "$1"
+}
+
+swap_config_nested ghostty ~/.config/ghostty/
+swap_config_nested nvim ~/.config/nvim/
 
 
 
