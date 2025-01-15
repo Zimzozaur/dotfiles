@@ -6,7 +6,7 @@ set -e
 PACMAN_APPS=(
   fakeroot
   base-devel
-  nvim
+  neonvim
   tmux
   neofetch
   ttf-nerd-fonts-symbols-mono
