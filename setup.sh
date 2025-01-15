@@ -4,7 +4,9 @@
 set -e
 
 PACMAN_APPS=(
-  ghostty
+  fakeroot
+  base-devel
+  nvim
   tmux
   neofetch
   ttf-nerd-fonts-symbols-mono
@@ -30,6 +32,9 @@ for app in "${APP[@]}"; do
 done
 
 
+# Ghostty
+yay -S ghostty-git
+
 # Dropbox
 echo "Downloading Dropbox..."
 cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
@@ -47,7 +52,7 @@ wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.5.2.35332.tar.gz
 
 echo "Extracting JetBrains Toolbox..."
 tar -xzf jetbrains-toolbox-2.5.2.35332.tar.gz
-cd jetbrains-toolbox
+cd jetbrains-toolbox-2.5.2.35332
 
 echo "Run JetBrains Toolbox..."
 ./jetbrains-toolbox
@@ -61,9 +66,30 @@ rm -rf jetbrains-toolbox-2.5.2.35332.tar.gz jetbrains-toolbox-*
 echo "Setting configs..."
 cd ~/config_baby/
 
-for dir in */; do
+swap_config() {
+  echo "Setting $1"
+  rm -rf "$2"
+  stow "$1"
+}
+
+FLAT_PATHS=(
+  git
+)
+
+for dir in "${FLAT_PATHS[@]}"; do
   echo "Setting $dir"
-  stow "$dir"
+  swap_config "$dir" ~/"$dir"
 done
+
+DOT_CONFIG_PATHS=(
+  ghostty
+  nvim
+)
+
+for dir in "${DOT_CONFIG_PATHS[@]}"; do
+  echo "Setting $dir"
+  swap_config "$dir" ~/"$dir"
+done
+
 
 echo "🔥 All done! 🔥"
