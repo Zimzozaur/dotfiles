@@ -19,6 +19,7 @@ PACMAN_APPS=(
   calibre
   virtualbox
   python-pipx
+  git-lfs
 )
 
 echo "Updating package manager..."
@@ -64,7 +65,7 @@ rm -rf jetbrains-toolbox-2.5.2.35332.tar.gz jetbrains-toolbox-*
 
 # Config files
 echo "Setting configs..."
-cd ~/config_baby/
+cd ~/dotfiles/
 
 swap_config() {
   echo "Setting $1"
@@ -88,7 +89,7 @@ DOT_CONFIG_PATHS=(
 
 for dir in "${DOT_CONFIG_PATHS[@]}"; do
   echo "Setting $dir"
-  swap_config "$dir" ~/"$dir"
+  swap_config "$dir" ~/.config/"$dir"
 done
 
 
