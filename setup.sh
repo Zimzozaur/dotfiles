@@ -75,6 +75,7 @@ swap_config() {
 
 FLAT_PATHS=(
   git
+  tmux
 )
 
 for dir in "${FLAT_PATHS[@]}"; do
