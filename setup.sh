@@ -71,7 +71,7 @@ swap_config_flat() {
   stow "$1"
 }
 
-swap_config_flat git $HOME/.gitconfig/
+swap_config_flat git $HOME/.gitconfig
 swap_config_flat tmux $HOME/.tmux.conf
 
 swap_config_nested() {
